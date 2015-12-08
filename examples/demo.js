@@ -14,7 +14,7 @@ app.filter('propsFilter', function() {
 
     if (angular.isArray(items)) {
       var keys = Object.keys(props);
-        
+
       items.forEach(function(item) {
         var itemMatches = false;
 
@@ -77,6 +77,16 @@ app.controller('DemoCtrl', function($scope, $http, $timeout, $interval) {
 
     if (item.name[0] >= 'N' && item.name[0] <= 'Z')
         return 'From N - Z';
+
+  };
+
+  $scope.someObjGroupFn = function (item){
+
+    if (item.name[0] >= 'A' && item.name[0] <= 'M')
+        return {name:'From A - M', type: 'a'};
+
+    if (item.name[0] >= 'N' && item.name[0] <= 'Z')
+        return {name: 'From N - Z', type: 'b'};
 
   };
 

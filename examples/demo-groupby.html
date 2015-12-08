@@ -52,6 +52,13 @@
     .selectize-control > .selectize-dropdown {
       top: 36px;
     }
+
+    .type-a {
+      color: red
+    }
+    .type-b {
+      color: blue
+    }
   </style>
 </head>
 
@@ -81,6 +88,18 @@
   <ui-select ng-model="person.selected" theme="select2" ng-disabled="disabled" style="min-width: 300px;" title="Choose a person">
     <ui-select-match placeholder="Select a person in the list or search his name/age...">{{$select.selected.name}}</ui-select-match>
     <ui-select-choices group-by="someGroupFn" repeat="person in people | propsFilter: {name: $select.search, age: $select.search}">
+      <div ng-bind-html="person.name | highlight: $select.search"></div>
+      <small>
+        email: {{person.email}}
+        age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+      </small>
+    </ui-select-choices>
+    </ui-select>
+
+  <h2>Grouped using a function that returns an object (group-by="someObjGroupFn")</h2>
+  <ui-select ng-model="person.selected" theme="select2" ng-disabled="disabled" style="min-width: 300px;" title="Choose a person">
+    <ui-select-match placeholder="Select a person in the list or search his name/age...">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices group-by="someObjGroupFn" group-label-class="'type-' + $group.type" repeat="person in people | propsFilter: {name: $select.search, age: $select.search}">
       <div ng-bind-html="person.name | highlight: $select.search"></div>
       <small>
         email: {{person.email}}

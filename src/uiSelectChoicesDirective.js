@@ -21,6 +21,7 @@ uis.directive('uiSelectChoices',
 
         // var repeat = RepeatParser.parse(attrs.repeat);
         var groupByExp = attrs.groupBy;
+        var groupLabelClassExp = attrs.groupLabelClass;
         var groupFilterExp = attrs.groupFilter;
 
         $select.parseRepeatAttr(attrs.repeat, groupByExp, groupFilterExp); //Result ready at $select.parserResult
@@ -34,6 +35,11 @@ uis.directive('uiSelectChoices',
           var groups = element.querySelectorAll('.ui-select-choices-group');
           if (groups.length !== 1) throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-group but got '{0}'.", groups.length);
           groups.attr('ng-repeat', RepeatParser.getGroupNgRepeatExpression());
+        }
+
+        if(groupLabelClassExp){
+          var labels = element.querySelectorAll('.ui-select-choices-group-label');
+          labels.attr('ng-class', groupLabelClassExp);
         }
 
         var choices = element.querySelectorAll('.ui-select-choices-row');
