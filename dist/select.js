@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.13.2 - 2015-12-08T21:03:41.217Z
+ * Version: 0.13.2 - 2016-03-09T15:46:55.305Z
  * License: MIT
  */
 
@@ -219,6 +219,7 @@ uis.directive('uiSelectChoices',
 
         choices.attr('ng-repeat', $select.parserResult.repeatExpression(groupByExp))
             .attr('ng-if', '$select.open') //Prevent unnecessary watches when dropdown is closed
+            .attr('ng-mouseenter', '$select.setActiveItem('+$select.parserResult.itemName +')')
             .attr('ng-click', '$select.select(' + $select.parserResult.itemName + ',false,$event)');
 
         var rowsInner = element.querySelectorAll('.ui-select-choices-row-inner');
@@ -479,6 +480,10 @@ uis.controller('uiSelectCtrl',
     }
   };
 
+  ctrl.setActiveItem = function(item) {
+    ctrl.activeIndex = ctrl.items.indexOf(item);
+  };
+  
   ctrl.isActive = function(itemScope) {
     if ( !ctrl.open ) {
       return false;
