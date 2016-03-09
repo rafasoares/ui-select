@@ -234,6 +234,10 @@ uis.controller('uiSelectCtrl',
     }
   };
 
+  ctrl.setActiveItem = function(item) {
+    ctrl.activeIndex = ctrl.items.indexOf(item);
+  };
+  
   ctrl.isActive = function(itemScope) {
     if ( !ctrl.open ) {
       return false;
